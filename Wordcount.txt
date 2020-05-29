@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+int CharCount(char file[]){        //字符数统计函数
+    FILE *fp;
+    char ch;
+    int ccount=0;
+    fp=fopen(file,"r");
+    if(fp != NULL)
+    {
+        ch = fgetc(fp);
+        while(ch != EOF)
+        {
+            ccount++;
+            ch = fgetc(fp);
+        }
+    }
+    else
+    {
+        printf("打开失败\n");
+        fclose(fp);
+    }
+    printf("文件中字符的个数是：%d\n",ccount);
+    return ccount;
+}
+int WordCount(char file[]){        //单词数统计函数
+    FILE *fp;
+    char ch;
+    int wcount=0;
+    int flag;
+    fp=fopen(file,"r");
+    if(fp=NULL)
+    {
+        printf("打开失败\n");
+    }
+    else
+    {
+      do{
+          ch=fgetc(fp);
+          if(ch==' ' || ch==',')
+          {
+
+            flag=0;
+          }
+          else
+          {
+             if(flag==0)
+            {
+                wcount++;
+                flag=1;
+            }
+          }
+       }while(ch !=EOF);
+    }
+    printf("文件中单词的个数是%d\n",wcount);
+    return wcount;
+}
+int main()
+{
+
+    char input[10],File[200];
+    while(1){
+        printf("请输入用户命令：wc.exe-");
+        scanf("%s",&input);
+        if(input[0]=='c')
+        {
+           printf("请输入文件名：\n");
+           scanf("%s",&File);
+           int charcount=0;
+           charcount=CharCount(File);
+           printf("文件的字符数为：%d\n",charcount);
+           continue;
+        }
+        if(input[0]=='w')
+        {
+            printf("请输入文件名：\n");
+            scanf("%s",&File);
+            int wordcount=0;
+            wordcount=WordCount(File);
+            printf("文件的单词数为：%d\n",wordcount);
+            continue;
+        }
+
+
+        }
+    return 0;
+}
